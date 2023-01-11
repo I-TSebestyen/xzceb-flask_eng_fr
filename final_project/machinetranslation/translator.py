@@ -16,14 +16,19 @@ language_translator = LanguageTranslatorV3(
 )
 
 language_translator.set_service_url(url)
-language_translator.set_disable_ssl_verification(True)
 
-translation = language_translator.translate(
-    text='Hello, how are you today?',
-    model_id='en-es').get_result()
-print(json.dumps(translation, indent=2, ensure_ascii=False))
 
 def englishToFrench(englishText):
-    pass
-    # return frenchText
+    translation = language_translator.translate(
+        text=englishText,
+        model_id='en-fr').get_result()
+    frenchText = translation['translations'][0]['translation']
+    return frenchText
 
+
+def frenchToEnglish(frenchText):
+    translation = language_translator.translate(
+        text=frenchText,
+        model_id='fr-en').get_result()
+    englishText = translation['translations'][0]['translation']
+    return englishText
